@@ -24,3 +24,4 @@ This project uses CSS, EJS, JavaScript, and MongoDb
 - Add a feature that show the tasks urgency
 
 # Wireframe
+![To-Do Wireframe](./To-Do-App%20Wireframe.png)
