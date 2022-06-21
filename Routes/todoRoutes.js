@@ -10,8 +10,6 @@ router.post('/create', todoCtrl.create)
 
 router.get('/:id/edit', todoCtrl.edit)
 
-router.get('/:id', todoCtrl.show)
-
 router.put('/:id', todoCtrl.update)
 
 router.delete('/:id', todoCtrl.deleteToDo)

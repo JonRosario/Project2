@@ -6,32 +6,40 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ToDo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="/index.css">
+
 </head>
 
-<body>
-  <h1>To-Do-App</h1>
-  <table>
-    <% td.map((todo, index)=> {%>
+<body class="bg-success p-2 text-white bg-opacity-75">
+  <a href=" /logout"> <button class="btn btn-secondary">LogOut</button></a>
+  <h1 class="title">To-Do-App</h1>
+  <table class="table table-borderless">
+    <% u.todos.map((todo, index)=> {%>
       <tr>
         <td>
-          <!-- <%=todo.doDate%> -->
-        </td>
-        <td>
-          <a href="/todo/<%=todo._id%>/edit">
-            <%=todo.title%>
-          </a>
+          <div class="td">
+            <a href="/todo/<%=todo._id%>/edit" class="link-light">
+              <%=todo.title%>
+            </a>
+          </div>
         </td>
         <td>
           <input name="done" type="checkbox">
         </td>
         <td>
           <form action="/todo/<%=todo._id%>?_method=DELETE" method="POST">
-            <input type="submit" value="Remove">
+            <button type="button" class="btn btn-danger btn-sm">X</button>
         </td>
       </tr>
       <%})%>
   </table>
-  <a href="/todo/new"><button>New ToDo</button></a>
+  <a href="/todo/new"><button type="button" class="btn btn-success">New ToDo</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"></script>
 </body>
 
 </html>

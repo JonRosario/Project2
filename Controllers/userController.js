@@ -1,20 +1,9 @@
-const toDo = require('../Models/user')
+const User = require('../Models/User')
 
 function index(req, res) {
-  let userSignedIn = false
-  if (!userSignedIn) {
-
-  }
-  res.render('new')
+  res.render('User/index')
 }
-
-function show(req, res) {
-
-}
-
 
 module.exports = {
   index,
-  show,
-
 }

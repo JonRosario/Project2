@@ -7,11 +7,12 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const PORT = 3000
 
-require('./db/connection')
 require('dotenv').config();
+require('./db/connection')
 require('./db/passport');
 require('./Routes/index')
 
+app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
@@ -31,7 +32,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/todo', require('./Routes/todoRoutes'))
-app.use('/', require('./Routes/userRoutes'))
+app.use('/user', require('./Routes/userRoutes'))
 app.use('/', require('./Routes/index'))
 
 app.listen(3000, () => {

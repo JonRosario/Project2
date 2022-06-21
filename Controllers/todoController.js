@@ -1,11 +1,16 @@
-
-const data = require('../Models/todo.js')
-let todo = data.todo
+const User = require('../Models/User')
+const data = require('../Models/Todo.js')
+const { todo } = require('../Models/Todo.js')
+let Todo = data.todo
 
 async function index(req, res) {
-  todo.find({}, (err, td) => {
-    res.render('todos/index', { td })
-  })
+  if (req.user) {
+    User.findById(req.user._id, (err, u) => {
+      res.render('todos/index', { u })
+    })
+  } else {
+    res.redirect('/user')
+  }
 }
 
 function newTodo(req, res) {
@@ -18,47 +23,49 @@ function create(req, res) {
   } else {
     req.body.done = false
   }
-  todo.create(req.body, (err, td) => {
+  Todo.create(req.body, (err, td) => {
     if (err) {
       res.status(400).json(err)
       return
     }
+    User.findById(req.user._id, (err, u) => {
+      u.todos.push(td)
+      u.save(err => err)
+    })
     res.redirect('/todo')
   })
 }
 
 function edit(req, res) {
-  console.log(req.params.id)
-  todo.findOne({ _id: req.params.id }, (err, td) => {
-    console.log(td)
+  User.findById(req.user._id, (err, u) => {
+    let td = u.todos.id(req.params.id)
     res.render('todos/edit', { td })
   })
 }
 
-
-function show(req, res) {
-  let td = todo.findOne({ _id: req.params.id })
-  res.json(td)
-}
-
-
 function update(req, res) {
-  todo.findByIdAndUpdate(req.params.id, req.body,
-    { new: true }, (err, td) => {
-      if (err) {
-        res.status(400).json(err)
-        return
-      }
-      res.redirect('/todo')
-    })
+  User.findById(req.user._id).then(user => {
+    let todo = user.todos.id(req.params.id);
+    todo.remove()
+    user.todos.push({ title: req.body.title })
+    user.save().then((u) => {
+    });
+
+  }).then(() => {
+    res.redirect('/todo')
+  }).catch(err => {
+  });
 }
+
 
 function deleteToDo(req, res) {
-  todo.findByIdAndDelete(req.params.id, (err, td) => {
+  User.findById(req.user._id, (err, user) => {
     if (err) {
       res.status(400).json(err)
       return
     }
+    user.todos.id(req.params.id).remove()
+    user.save(err => err)
     res.redirect('/todo')
   })
 }
@@ -68,7 +75,6 @@ module.exports = {
   newTodo,
   create,
   edit,
-  show,
   update,
   deleteToDo
 }

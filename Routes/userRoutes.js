@@ -4,6 +4,4 @@ const userCtrl = require('../Controllers/userController')
 
 router.get('/', userCtrl.index)
 
-router.get('/:id', userCtrl.show)
-
 module.exports = router

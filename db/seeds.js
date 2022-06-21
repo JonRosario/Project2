@@ -2,8 +2,8 @@
 require('./connection')
 
 
-const User = require('../models/user')
-const { todo } = require('../models/todo')
+const User = require('../Models/User')
+const { todo } = require('../Models/Todo')
 const todoSeeds = require('./seeds.json')
 
 todo.deleteMany({})
