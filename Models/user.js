@@ -6,5 +6,6 @@ const userSchema = new Schema({
   googleId: String,
   todos: [todoSchema]
 })
+let User = mongoose.model('User', userSchema)
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = User
