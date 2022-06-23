@@ -1,4 +1,4 @@
-// const mongoose = require('./')
+require('dotenv').config()
 require('./connection')
 
 
