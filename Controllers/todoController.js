@@ -1,4 +1,4 @@
-const User = require('../Models/User')
+const User = require('../Models/user')
 const data = require('../Models/Todo.js')
 const { todo } = require('../Models/Todo.js')
 let Todo = data.todo
