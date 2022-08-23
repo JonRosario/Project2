@@ -1,6 +1,6 @@
 const User = require('../Models/user')
-const data = require('../Models/Todo.js')
-const { todo } = require('../Models/Todo.js')
+const data = require('../Models/todo.js')
+const { todo } = require('../Models/todo.js')
 let Todo = data.todo
 
 async function index(req, res) {
